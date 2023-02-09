@@ -1,2 +1,2 @@
 #!/bin/bash
-chown --no-preserve-root vincent:staff /*
+chown vincent:staff *
