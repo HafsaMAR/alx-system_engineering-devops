@@ -13,7 +13,7 @@ if [ -e "$filename"  ]; then
 else
     echo "school file does not exist"
 fi
-if [[ -f "$filename" ]]; then
+if ! [[ -f "$filename" ]]; then
     
         echo "school file is a regular file"
 fi
