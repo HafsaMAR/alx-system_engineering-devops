@@ -1,1 +1,6 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2009
+for pid in $(pgrep bash)
+do
+    echo "$pid bash"
+done
