@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Get the PID of the 4-to_infinity_and_beyond process
 
-PID=$(ps aux | grep '[4]-to_infinity_and_beyond' | awk '{print $2}')
+PID=$(pgrep -f 4-to_infinity_and_beyond)
 
-kill $PID
+kill "$PID"
