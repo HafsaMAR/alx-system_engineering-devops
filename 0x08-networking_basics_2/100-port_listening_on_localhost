@@ -1,1 +1,3 @@
 #!/usr/bin/env bash
+# This script will start a TCP server that listens on port 98 of localhost
+nc -lk 127.0.0.1 98

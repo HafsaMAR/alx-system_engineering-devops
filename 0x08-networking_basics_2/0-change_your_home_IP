@@ -1,1 +1,14 @@
 #!/usr/bin/env bash
+# This script will modify /etc/hosts to change the resolution of localhost and facebook.com
+
+# Check if running as root
+if [ "$EUID" -ne 0 ]
+  then exit
+fi
+
+# Backup the original /etc/hosts file
+cp /etc/hosts /etc/hosts.bak
+
+# Change the resolution of localhost and facebook.com
+echo "127.0.0.2 localhost" >> /etc/hosts
+echo "8.8.8.8 facebook.com" >> /etc/hosts
