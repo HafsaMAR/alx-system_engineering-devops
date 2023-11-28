@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Script to install nginx on server
 
+
 sudo apt update
 sudo apt -y install nginx
 
