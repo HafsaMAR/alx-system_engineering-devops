@@ -4,17 +4,8 @@
 sudo apt update
 sudo apt -y install nginx
 
-sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
-server {
-    listen 80;
-    server_name 251432-web-01;
-    root /var/www/html;
-    location / {
-        return 200 "Hello World!";
-    }
-
-}
-EOF'
+echo 'Hello World!' | sudo tee /var/www/html/index.html
+sudo ufw allow 'Nginx HTTP'
 
 sudo nginx -t
-sudo service nginx -s reload
+sudo service nginx restart
