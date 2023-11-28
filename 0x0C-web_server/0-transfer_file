@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 #script to transfer a file to a server
 
 if [ "$#" -lt 4 ]; then
