@@ -1,1 +1,23 @@
 #!/usr/bin/env bash
+# Script to install nginx on server
+
+sudo apt update
+sudo apt install nginx
+
+sudo systemctl start nginx
+sudo systemctl enable nginx
+
+sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
+server {
+    listen 80;
+    server_name 251432-web-01;
+    root /var/www/html;
+    location / {
+        return 200 "Hello World";
+    }
+
+}
+EOF'
+
+sudo nginx -t
+sudo nginx -s reload
