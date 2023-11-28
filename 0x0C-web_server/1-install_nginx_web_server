@@ -2,10 +2,7 @@
 # Script to install nginx on server
 
 sudo apt update
-sudo apt install nginx
-
-sudo systemctl start nginx
-sudo systemctl enable nginx
+sudo apt -y install nginx
 
 sudo bash -c 'cat > /etc/nginx/sites-available/default <<EOF
 server {
@@ -13,11 +10,11 @@ server {
     server_name 251432-web-01;
     root /var/www/html;
     location / {
-        return 200 "Hello World";
+        return 200 "Hello World!";
     }
 
 }
 EOF'
 
 sudo nginx -t
-sudo nginx -s reload
+sudo service nginx -s reload
