@@ -5,16 +5,14 @@ sudo apt update
 sudo apt -y install nginx
 
 # configure the redirection
-sudo bash -c 'cat > /etc/nginx/sites-available/redirect.conf <<EOF
-server {
+sudo bash -c 'echo "server {
     lister 80;
     server_name ackerm.tech;
 
     location /redirect_me {
         return 301 https://perplexity.ai;
     }
-}
-EOF'
+}" > /etc/nginx/sites-available/redirect.conf'
 
 # create symbolic link to enable the configuration
 sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
