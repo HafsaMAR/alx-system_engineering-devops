@@ -26,3 +26,4 @@ echo 'server {
 #if the test is succesful, reload nginx to apply the changes
 sudo service nginx restart   
 sudo service nginx reload
+sudo apt purge nginx nginx-common nginx-core
