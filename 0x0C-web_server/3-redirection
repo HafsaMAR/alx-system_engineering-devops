@@ -2,23 +2,27 @@
 # nginx & 301
 
 sudo apt update
-sudo apt -y install nginx
+sudo apt-get -y instal nginx
+sudo chown -R "$USER":"$USER" /var/www/html
+echo "Hello World!" > /var/www/html/index.html
 
 # configure the redirection
-sudo bash -c 'echo "server {
-    listen 80;
-    server_name ackerm.tech;
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-enabled
+sudo rm /etc/nginx/sites-enabled/default
+
+echo 'server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
 
     location /redirect_me {
-        return 301 https://perplexity.ai;
+        return 301 https://www.perplexity.ai/
     }
-}" > /etc/nginx/sites-available/redirect.conf'
+}' > /etc/nginx/sites-enabled/default
 
-# create symbolic link to enable the configuration
-sudo ln -s /etc/nginx/sites-available/redirect.conf /etc/nginx/sites-enabled/
 
-#test the nginx configuration
-sudo nginx -t
-
-#if the test is succesful, reload nginx to apply the changes   
-sudo systemctl reload nginx
+#if the test is succesful, reload nginx to apply the changes
+sudo service nginx restart   
+sudo service nginx reload
