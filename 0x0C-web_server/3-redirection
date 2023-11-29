@@ -6,7 +6,7 @@ sudo apt -y install nginx
 
 # configure the redirection
 sudo bash -c 'echo "server {
-    lister 80;
+    listen 80;
     server_name ackerm.tech;
 
     location /redirect_me {
