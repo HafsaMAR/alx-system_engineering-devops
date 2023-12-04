@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Configure Nginx to add custom header
+
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo chown -R "$USER":"$USER" /var/www/html
+echo "Hello World!" > /var/www/html/index.html
+
+# configure redirection
+sudo chown -R "$USER":"$USER" /etc/nginx/sites-enabled
+sudo rm /etc/nginx/sites-enabled/default
+
+echo "server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html;
+
+    location /redirect_me {
+        return 301 https://www.perpelexity.ai;
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        root /var/www/html;
+        internal;
+    }
+}" > /etc/nginx/sites-enabled/default
+
+echo "Ceci n'est pas une page" > /var/www/html/404.html
+
+sudo sed -i "server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
+
+sudo nginx -t
+sudo service nginx restart
