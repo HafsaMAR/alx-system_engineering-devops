@@ -16,7 +16,7 @@ echo "server {
 
     root /var/www/html;
     index index.html;
-
+    add_header X-Served-By $(hostname) always;
     location /redirect_me {
         return 301 https://www.perpelexity.ai;
     }
@@ -30,7 +30,6 @@ echo "server {
 
 echo "Ceci n'est pas une page" > /var/www/html/404.html
 
-sudo sed -i "server_name _/a add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-enabled/default
 
 sudo nginx -t
 sudo service nginx restart
