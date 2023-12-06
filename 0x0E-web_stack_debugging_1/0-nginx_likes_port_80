@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#automation _ debugging Ubuntu container’s Nginx installation not listening on port 80
+
+sudo kill $(sudo lsof -i :80 | awk '{print $1}')
+sudo lsof -i :80
+sudo systemctl status nginx
+sudo netstat -ltnp
+
