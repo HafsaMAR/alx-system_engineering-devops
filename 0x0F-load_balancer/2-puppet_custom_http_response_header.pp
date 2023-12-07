@@ -1,32 +1,18 @@
-class nginx {
-    package { 'nginx':
-        ensure => installed,
-    }
+# Install and configure nginx
 
-    service { 'nginx':
-    enable  =>true,
-    ensure  => running,
-    require => [Package['nginx']],
-    }
-
-    file { '/etc/nginx/sites-available/default':
-        ensure  => file,
-        content => "server {
-                        listen 80 default_server;
-                        listen [::]:80 default_server;
-                        server_name _;
-                        location / {
-                            add_header X-Served-By $hostname;
-                            root /var/www/html;
-                            index index.html index.htm index.nginx-debian.html;
-                        }
-                    }"
-        require => [Package['nginx'], Service['nginx']],
-        notify  => Service['nginx'],
-
-    }
+exec { 'update':
+    command => '/user/bin/apt-get update',
+}
+-> package { 'nginx':
+    ensure => installed,
 }
 
-# the name of the custom HTTP header must be X-served-By
-
-# the value of the custom HTTP header must be the hostname of the server Nginx is running on
+-> file_line {'header_served_by':
+    path  => '/etc/nginx/sites-available/default',
+    match => '^server {',
+    line  => "server {\n\tadd_header X-Served-By \"$(hostname)\";"
+    multiple => false,  
+}
+-> exec { 'run':
+    command => '/user/sbin/service nginx restart',
+}
