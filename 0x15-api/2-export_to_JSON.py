@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+"""Task2 dump data into json"""
 import json
 import requests
 from sys import argv
-"""Task2 dump data into json"""
+
 
 if __name__ == "__main__":
     # task 0 function
