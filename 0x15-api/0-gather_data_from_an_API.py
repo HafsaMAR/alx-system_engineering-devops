@@ -34,4 +34,4 @@ if __name__ == "__main__":
 
     for dic in data_todo:
         if dic.get("completed"):
-            print(f"\n\t {dic.get('title')}")
+            print("\t {}".format(dic.get('title')))
