@@ -7,7 +7,7 @@ from sys import argv
 
 if __name__ == "__main__":
     """Task 0"""
-    id = 2
+    id = argv[1]
     params_todo = {"userId": id}
     params_user = {"id": id}
     url_todo = "https://jsonplaceholder.typicode.com/todos"
