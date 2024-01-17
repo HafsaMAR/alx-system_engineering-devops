@@ -13,14 +13,26 @@ def number_of_subscribers(subreddit):
         "User-Agent": "linux:0x16.api.advanced:v1.0.0"
     }
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
-    if response.status_code == 404:
-        return 0
+    try:
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        response.raise_for_status()
 
-    else:
         data = response.json().get("data")
-
         return data.get("subscribers")
+    except requests.HTTPError as e:
+        if e.response.status_code == 404:
+            return 0
+        else:
+            return None
+    except requests.RequestException as e:
+        return None
+    # if response.status_code == 404:
+    #     return 0
+
+    # else:
+    #     data = response.json().get("data")
+
+    #     return data.get("subscribers")
 
     # response = requests.get(url, headers={'User-Agent': 'app/1.0'})
     # if response.status_code == 200:
