@@ -2,11 +2,11 @@
 
 # Increase the ULIMIT of the nginx server
 exec { 'update ULIMIT':
-	command  => "sed -i 's/^ULIMIT=.*/ULIMIT=\"-n 20000\"/' /etc/default/nginx",
-	provider => shell,
+  command  => "sed -i 's/^ULIMIT=.*/ULIMIT=\"-n 20000\"/' /etc/default/nginx",
+  provider => 'shell',
 }
 
 exec { 'nginx-restart':
-	command  => 'service nginx restart',
-	provider => 'shell',
+  command  => 'service nginx restart',
+  provider => 'shell',
 }
