@@ -17,6 +17,11 @@ server {
                 proxy_redirect off;
         }
 
+        location /static/ {
+            alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+            proxy_redirect off;
+        }
+
         location /airbnb-onepage {
                 proxy_pass http://127.0.0.1:5000/airbnb-onepage;
                 proxy_redirect off;
@@ -32,8 +37,7 @@ server {
                 proxy_pass http://localhost:5002/api/;
                 proxy_redirect off;
         }
-
-
+        
         location /redirect_me {
         return 301 https://www.perpelexity.ai/;
         }
